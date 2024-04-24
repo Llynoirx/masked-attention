@@ -146,7 +146,7 @@ class Attention:
             # Derivatives wrt attention weights (raw and normalized)
 
             dLdA_sig       = torch.matmul(dLdXnew, self.V.transpose(1, 2)) # (B, T, T)
-            dLdA_w         = self.softmax.backward(dLdA_sig)*math.sqrt(self.D_k) #(B, T, T)
+            dLdA_w = self.softmax.backward(dLdA_sig) / math.sqrt(self.D_k) #(B, T, T)
 
             # Derivatives wrt keys, queries, and value
             
